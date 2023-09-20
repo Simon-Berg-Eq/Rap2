@@ -1,0 +1,26 @@
+projection;
+use draft;
+define behavior for Z09_C_Travel2 alias Travel
+use etag
+{
+ use create;
+ use update;
+ use delete;
+ use action Activate;
+ use action Discard;
+ use action Edit;
+ use action Prepare;
+ use action Resume;
+ use association _TravelItem { with draft; }
+
+ use action set_to_cancelled;
+}
+
+define behavior for Z09_C_TravelItem alias Item
+use etag
+{
+  use association _Travel { with draft; }
+  use update;
+  use delete;
+
+}

@@ -1,0 +1,103 @@
+managed implementation in class zbp_09_i_travel unique;
+
+with draft;
+
+define behavior for Z09_I_TRAVEL alias Travel
+persistent table z09_travel
+draft table z09_travel_d
+lock master
+total etag ChangedAt
+etag master localChangedAt
+authorization master ( instance )
+
+
+{
+  create;
+  //update;
+  delete;
+  draft determine action Prepare
+  {
+    validation validateCustomer;
+    validation validateStartDate;
+    validation validateEndDate;
+    validation validateSequence;
+
+  }
+
+  association _TravelItem { create; with draft; }
+
+
+  field ( readonly ) AgencyID, TravelID, Status;
+  field ( mandatory ) EndDate;
+  field ( readonly, numbering : managed ) Trguid;
+  field ( features : instance ) CustomerID, StartDate;
+  //action set_to_cancelled;
+  action ( features : instance ) set_to_cancelled;
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  update ( features : instance );
+
+
+  mapping for Z09_TRAVEL corresponding
+  {
+    AgencyID = agencynum;
+    TravelDescription = trdesc;
+    StartDate = stdat;
+    EndDate = enddat;
+    ChangedAt = changed_at;
+    localChangedAt = loc_changed_at;
+    ChangedBy = changed_by;
+  }
+
+  validation validateCustomer on save { field CustomerID; }
+  validation validateStartDate on save { field StartDate; }
+  validation validateEndDate on save { field EndDate; }
+  validation validateSequence on save { field StartDate, EndDate; }
+  determination determineSemanticKey on modify { create; }
+
+}
+
+define behavior for Z09_I_TRAVELITEM alias Item
+persistent table z09_tritem
+draft table z09_tritem_d
+authorization dependent by _Travel
+lock dependent by _Travel
+etag master localChangedAt
+
+{
+  //create;
+  update;
+  delete;
+
+  field ( readonly, numbering : managed ) Itguid;
+  field ( readonly ) AgencyID, TravelId, ItemID, Trguid;
+  association _Travel { with draft; }
+  mapping for z09_tritem
+  {
+    Itguid = itguid;
+    AgencyID = agencynum;
+    TravelId = travelid;
+    ItemID = tritemno;
+    Trguid = trguid;
+    CarrierId = carrid;
+    ConnectionId = connid;
+    FlightDate = fldate;
+    BookingId = bookid;
+    FlightClass = class;
+    PassengerName = passname;
+    CreatedAt = created_at;
+    CreatedBy = created_by;
+    ChangedAt = changed_at;
+    ChangedBy = changed_by;
+    localChangedAt = loc_changed_at;
+  }
+
+  determination determineSemanticKey on modify { create; }
+  validation validateFlightClass on save
+  { create;
+    field FlightClass;
+  }
+
+}

@@ -1,0 +1,11 @@
+unmanaged implementation in class zbp_09_i_agency unique;
+
+define behavior for Z09_I_AGENCY alias Agency
+//late numbering
+//lock master
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+}

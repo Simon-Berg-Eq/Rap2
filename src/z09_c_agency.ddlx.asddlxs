@@ -1,0 +1,71 @@
+@Metadata.layer: #CORE
+
+
+@UI: { headerInfo: { typeName: 'Travel Agency', 
+                     typeNamePlural: 'Travel Agencies', 
+                     title: { type: #STANDARD, 
+                              value: 'AgencyID' } } }
+                              
+
+annotate view Z09_C_AGENCY
+    with 
+{
+ @UI.facet: [ { id:            'Agency',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Travel Agency',
+                 position:      10 }]
+                   
+ @UI: { lineItem:       [ { position: 10, 
+                             importance: #HIGH } ], 
+         identification: [ { position: 10 } ], 
+         selectionField: [ { position: 10 } ] }
+AgencyID;
+ @UI: { lineItem:       [ { position: 20, 
+                             importance: #HIGH } ], 
+         identification: [ { position: 20 } ], 
+         selectionField: [ { position: 20 } ] }
+Name;
+ @UI: { lineItem:       [ { position: 30, 
+                             importance: #LOW } ], 
+         identification: [ { position: 30 } ] }
+Street;
+ @UI: { lineItem:       [ { position: 40, 
+                             importance: #LOW } ], 
+         identification: [ { position: 40 } ] }
+Postbox;
+ @UI: { lineItem:       [ { position: 50, 
+                             importance: #MEDIUM } ], 
+         identification: [ { position: 50 } ], 
+         selectionField: [ { position: 30 } ] }
+ZIPCode;
+ @UI: { lineItem:       [ { position: 60, 
+                             importance: #MEDIUM } ], 
+         identification: [ { position: 60 } ] }
+City;
+ @UI: { lineItem:       [ { position: 70, 
+                             importance: #MEDIUM } ], 
+         identification: [ { position: 70 } ] }
+Country;
+ @UI: { lineItem:       [ { position: 80, 
+                             importance: #LOW } ], 
+         identification: [ { position: 80 } ] }
+Region;
+ @UI: { lineItem:       [ { position: 90, 
+                             importance: #LOW } ], 
+         identification: [ { position: 90 } ] }
+Telephone;
+ @UI: { lineItem:       [ { position: 100, 
+                             importance: #LOW } ], 
+         identification: [ { position: 100 } ] }
+Url;
+ @UI: { lineItem:       [ { position: 110, 
+                             importance: #LOW } ], 
+         identification: [ { position: 110 } ] }
+
+Language;
+ @UI: { lineItem:       [ { position: 120, 
+                             importance: #LOW } ], 
+         identification: [ { position: 120 } ] }
+CurrencyCode;    
+}

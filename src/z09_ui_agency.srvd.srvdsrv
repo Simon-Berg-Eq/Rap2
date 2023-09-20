@@ -1,0 +1,4 @@
+@EndUserText.label: 'Agency service definition 1'
+define service Z09_UI_AGENCY {
+  expose Z09_C_AGENCY;
+}

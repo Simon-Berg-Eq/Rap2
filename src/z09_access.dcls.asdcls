@@ -1,0 +1,12 @@
+@EndUserText.label: 'access control'
+@MappingRole: true
+define role Z09_ACCESS {
+    grant 
+        select
+            on
+                Z09_I_TRAVEL
+                    where
+                        (AgencyID) = aspect pfcg_auth(S_AGENCY, AGENCYNUM, ACTVT =
+'03');
+                        
+}
